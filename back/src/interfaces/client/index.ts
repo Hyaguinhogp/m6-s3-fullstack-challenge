@@ -14,7 +14,9 @@ export interface IClientCreate {
 }
 
 export interface IClientLogin {
-    name: string
     email: string
-    tel: string
+}
+
+export interface IContactAdd {
+    email: string
 }

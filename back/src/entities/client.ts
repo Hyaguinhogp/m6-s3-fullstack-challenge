@@ -1,5 +1,5 @@
 import {
-    Column, CreateDateColumn, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn, Timestamp
+    Column, CreateDateColumn, Entity, JoinTable, ManyToMany, OneToMany, OneToOne, PrimaryGeneratedColumn, Timestamp
 } from "typeorm";
 
 @Entity("clients")
@@ -17,10 +17,9 @@ export class Client {
     tel: string;
 
     @CreateDateColumn()
-    createdAt: Date;
+    readonly createdAt: Date;
 
-    @ManyToMany(type => Client, {
-        eager: true,
-    }) @JoinTable()
-    contacts: Client[];
+    @ManyToMany(() => Client)
+    @JoinTable()
+    contacts: Client[]
 }

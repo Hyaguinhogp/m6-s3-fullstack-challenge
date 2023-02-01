@@ -21,11 +21,7 @@ export default async function createClientService(client: IClientCreate) {
 
     const clientData = AppDataSource.getRepository(Client);
 
-    const clients = await clientData.find({
-        select: {
-            email: true
-        }
-    })
+    const clients = await clientData.find()
 
 
     const clientExists = clients.some(clientTest => clientTest.email === client.email);
