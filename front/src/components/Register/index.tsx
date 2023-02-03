@@ -36,7 +36,7 @@ const Register = () => {
     const onSubmitFunction = (data: FieldValues) => {
         activeLoading()
         console.log(data)
-        api.post("", data)
+        api.post("/clients", data)
             .then((res) => {
                 desactiveLoading()
                 toast.success("Cadastro realizado com sucesso!")

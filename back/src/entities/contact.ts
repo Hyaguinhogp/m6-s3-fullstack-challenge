@@ -1,10 +1,10 @@
 import {
-    Column, CreateDateColumn, Entity, JoinTable, ManyToMany, OneToMany, OneToOne, PrimaryGeneratedColumn, Timestamp
+    Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn
 } from "typeorm";
-import { Contact } from "./contact";
+import { Client } from "./client";
 
-@Entity("clients")
-export class Client {
+@Entity("contacts")
+export class Contact {
     @PrimaryGeneratedColumn("uuid")
     readonly id: string;
 
@@ -20,6 +20,6 @@ export class Client {
     @CreateDateColumn()
     readonly createdAt: Date;
 
-    @OneToMany(() => Contact, (contact) => contact.client)
-    contacts: Contact[]
+    @ManyToOne(() => Client, (client) => client.contacts)
+    client: Client
 }

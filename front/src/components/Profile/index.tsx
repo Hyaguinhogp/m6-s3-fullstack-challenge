@@ -1,30 +1,30 @@
-import { Client, Contact, Contacts, Options, ProfileContainer, ProfileContent } from "./styles"
+import { useContext } from "react"
+import { AiFillEdit } from "react-icons/ai"
+import { BsFillTelephoneFill } from "react-icons/bs"
 import { HiUserCircle } from "react-icons/hi"
 import { IoMdMail } from "react-icons/io"
-import { BsFillTelephoneFill } from "react-icons/bs"
-import { AiFillEdit } from "react-icons/ai"
 import { TiUserAdd } from "react-icons/ti"
-import { useContext, useEffect } from "react"
+import { BiLogOut } from "react-icons/bi"
 import { optionsContext } from "../../contexts/OptionsContext"
-import { loadingContext } from "../../contexts/LoadingContext"
 import { userContext } from "../../contexts/UserContext"
-import api from "../../services/api"
+import { Client, Contacts, Options, ProfileContainer, ProfileContent } from "./styles"
 import { cardContext } from "../../contexts/CardsContext"
-import { toast } from "react-hot-toast"
+import Contact from "../Contact"
 
 const Profile = () => {
-
-    const { activeLoading, desactiveLoading } = useContext(loadingContext)
-    const { user, updateUser } = useContext(userContext)
-    const { goToLogin } = useContext(cardContext)
-
+    const { user } = useContext(userContext)
     const { openEdit, openAddContact } = useContext(optionsContext)
+    const { goToLogin } = useContext(cardContext)
 
     return (
         <ProfileContainer>
             <ProfileContent>
                 <Client>
                     <Options>
+                        <BiLogOut className="option" onClick={() => {
+                            localStorage.removeItem("@client:token")
+                            goToLogin()
+                        }} />
                         <AiFillEdit className="option" onClick={() => openEdit()} />
                         <TiUserAdd className="option" onClick={() => openAddContact()} />
                     </Options>
@@ -43,42 +43,16 @@ const Profile = () => {
                 </Client>
                 <Contacts>
                     <h2>Contatos</h2>
-                    <Contact>
-                        <div className="left_info">
-                            <h3>Hyago Matos</h3>
-                            <span>hyago@mail.com</span>
-                        </div>
-                        <div className="right_info">
-                            <h3>(92) 991271930</h3>
-                        </div>
-                    </Contact>
-                    <Contact>
-                        <div className="left_info">
-                            <h3>Hyago Matos</h3>
-                            <span>hyago@mail.com</span>
-                        </div>
-                        <div className="right_info">
-                            <h3>(92) 991271930</h3>
-                        </div>
-                    </Contact>
-                    <Contact>
-                        <div className="left_info">
-                            <h3>Hyago Matos</h3>
-                            <span>hyago@mail.com</span>
-                        </div>
-                        <div className="right_info">
-                            <h3>(92) 991271930</h3>
-                        </div>
-                    </Contact>
-                    <Contact>
-                        <div className="left_info">
-                            <h3>Hyago Matos</h3>
-                            <span>hyago@mail.com</span>
-                        </div>
-                        <div className="right_info">
-                            <h3>(92) 991271930</h3>
-                        </div>
-                    </Contact>
+                    {
+                        user.contacts.length > 0 ? (
+                            user.contacts.map((contact, index) => {
+                                return (
+                                    <Contact key={index} contact={contact} />
+                                )
+                            })
+                        ) :
+                            <h3>Adicione mais contatos</h3>
+                    }
                 </Contacts>
             </ProfileContent>
         </ProfileContainer>

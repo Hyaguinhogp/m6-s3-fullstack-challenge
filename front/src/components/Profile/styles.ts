@@ -6,7 +6,7 @@ export const ProfileContainer = styled.div`
     min-height: 90vh;
     padding: 30px;
     background-color: white;
-    border-radius: 20px;
+    border-radius: 10px;
 `
 
 export const ProfileContent = styled.div`
@@ -63,6 +63,8 @@ export const Client = styled.div`
 export const Options = styled.div`
     display: flex;
     justify-content: space-between;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 30px;
     
     .option {
         font-size: 30px;
@@ -88,22 +90,5 @@ export const Contacts = styled.div`
 
     @media(min-width: 800px) {
         padding-left: 30px;
-    }
-`
-
-export const Contact = styled.div`
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    margin-bottom: 10px;
-
-    h3 {
-        font-size: 20px;
-    }
-
-    span {
-        font-size: 15px;
-        color: #888
     }
 `

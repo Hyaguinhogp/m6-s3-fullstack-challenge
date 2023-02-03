@@ -15,7 +15,7 @@ export const DefaultFormContainer = styled(motion.div)`
     min-height: 70vh;
     max-height: 90vh;
     padding: 5% 40px;
-    border-radius: 15px;
+    border-radius: 10px;
     background-color: white;
 
     form {
@@ -91,7 +91,7 @@ export const DefaultFormContainer = styled(motion.div)`
         height: 45px;
         margin-top: 10%;
         border: 0;
-        border-radius: 15px;
+        border-radius: 5px;
         font-size: 20px;
         background-color: #2B8CC4;
         color: white;
@@ -114,68 +114,5 @@ export const DefaultFormContainer = styled(motion.div)`
     a {
         cursor: pointer;
         color: #2B8CC4;
-    }
-`
-
-export const DefaultFormContent = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-
-    h1 {
-        font-size: 40px;
-        margin-bottom: 15%;
-    }
-
-    .inputs {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-    }
-
-    .input_container {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-        margin-bottom: 20px;
-    }
-
-    label {
-        font-size: 20px;
-        margin-bottom: 10px;
-    }
-
-    input {
-        display: flex;
-        height: 40px;
-        padding-left: 8px;
-        border: 2px solid black;
-        border-radius: 15px;
-    }
-
-    button {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
-        height: 45px;
-        margin-top: 15%;
-        border: 0;
-        border-radius: 15px;
-        font-size: 20px;
-        background-color: #2B8CC4;
-        color: white;
-        cursor: pointer;
-    }
-
-    button:hover {
-        background-color: white;
-        color: #2B8CC4;
-        border: 2px solid #2B8CC4;
-        transition-property: background-color;
-        transition-property: color;
-        transition-duration: 0.5s;
     }
 `

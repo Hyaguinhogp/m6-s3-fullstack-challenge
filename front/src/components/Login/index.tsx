@@ -18,7 +18,7 @@ export interface IRequest {
 const Login = () => {
 
     const { activeLoading, desactiveLoading } = useContext(loadingContext)
-    const { user, updateUser } = useContext(userContext)
+    const { updateUser } = useContext(userContext)
     const { goToRegister, goToProfile } = useContext(cardContext)
 
     const formSchema = yup.object().shape({
@@ -31,19 +31,18 @@ const Login = () => {
 
     const onSubmitFunction = (data: FieldValues) => {
         activeLoading()
-        api.post("/login", data)
+        api.post("/clients/login", data)
             .then((res) => {
-                localStorage.setItem("token", res.data.token)
+                localStorage.setItem("@client:token", res.data.token)
                 let config = {
                     headers: {
                         Authorization: `Bearer ${res.data.token}`
                     }
                 }
-                api.get("/self", config)
+                api.get("/clients/self", config)
                     .then((res) => {
                         desactiveLoading()
-                        console.log(res.data)
-                        updateUser(res.data)
+                        updateUser(res.data.data)
                         toast.success("Login realizado com sucesso!")
                         goToProfile()
                     })

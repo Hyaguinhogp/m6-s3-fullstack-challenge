@@ -21,16 +21,16 @@ export interface IRequest {
     tel: number
 }
 
-const AddContact = () => {
+const EditContact = () => {
 
     const { activeLoading, desactiveLoading } = useContext(loadingContext)
     const { refreshUser } = useContext(userContext)
-    const { close } = useContext(optionsContext)
+    const { close, actualContactId } = useContext(optionsContext)
 
     const formSchema = yup.object().shape({
-        name: yup.string().required("Nome obrigatório"),
-        email: yup.string().required("E-mail obrigatório").email("Insira um e-mail válido"),
-        tel: yup.string().required("Telefone obrigatório"),
+        name: yup.string(),
+        email: yup.string().email("Insira um e-mail válido"),
+        tel: yup.string(),
     })
 
     const { register, handleSubmit, formState: { errors } } = useForm<IRequest>({
@@ -45,14 +45,15 @@ const AddContact = () => {
                 Authorization: `Bearer ${localStorage.getItem("@client:token")}`
             }
         }
-        api.post("/contacts/add", data, config)
+        api.patch(`/contacts/${actualContactId}`, data, config)
             .then(async (res) => {
                 await refreshUser()
                 desactiveLoading()
-                toast.success("Contato adicionado com sucesso!")
+                toast.success("Contato atualizado com sucesso!")
             })
             .catch((error) => {
                 desactiveLoading()
+                console.log(error)
                 const message = error.response ? error.response.data.message : "Oops! Algo deu errado"
                 toast.error(message)
             })
@@ -64,7 +65,7 @@ const AddContact = () => {
                     <div className="upbutton_container" onClick={() => close()}>
                         <ImCancelCircle className="close_button" />
                     </div>
-                    <h1>Adicionar contato</h1>
+                    <h1>Atualizar</h1>
                     <div className="inputs">
                         <div className="input_container">
                             <label htmlFor="" hidden>Nome</label>
@@ -92,4 +93,4 @@ const AddContact = () => {
     )
 }
 
-export default AddContact
+export default EditContact

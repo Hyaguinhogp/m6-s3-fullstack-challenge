@@ -14,6 +14,7 @@ import { BsFillTelephoneFill } from "react-icons/bs"
 import { ImCancelCircle } from "react-icons/im"
 import { optionsContext } from '../../contexts/OptionsContext'
 import { EditProfileContainer } from './styles'
+import { userContext } from '../../contexts/UserContext'
 
 export interface IRequest {
     name: number
@@ -24,6 +25,7 @@ export interface IRequest {
 const EditProfile = () => {
 
     const { activeLoading, desactiveLoading } = useContext(loadingContext)
+    const { refreshUser } = useContext(userContext)
     const { close } = useContext(optionsContext)
 
     const formSchema = yup.object().shape({
@@ -37,13 +39,18 @@ const EditProfile = () => {
     })
 
     const onSubmitFunction = (data: FieldValues) => {
+        close()
         activeLoading()
-        console.log(data)
-        api.patch("", data)
-            .then((res) => {
+        const config = {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("@client:token")}`
+            }
+        }
+        api.patch("/clients", data, config)
+            .then(async (res) => {
+                await refreshUser()
                 desactiveLoading()
                 toast.success("Informações atualizadas com sucesso!")
-                close()
             })
             .catch((error) => {
                 desactiveLoading()

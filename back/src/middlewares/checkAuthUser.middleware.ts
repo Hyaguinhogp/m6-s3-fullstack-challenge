@@ -8,7 +8,6 @@ export default function checkAuthUserMiddleware(
     res: Response,
     next: NextFunction
 ) {
-    console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaa")
     let token = req.headers.authorization;
 
     if (!token) {

@@ -7,7 +7,6 @@ const clientRoutes = Router();
 clientRoutes.get("", listClientsController);
 clientRoutes.get("/self", checkAuthUserMiddleware, getClientController);
 clientRoutes.post("", createClientController);
-clientRoutes.post("/add", checkAuthUserMiddleware, addContactController);
 clientRoutes.post("/login", loginController);
 clientRoutes.delete("", checkAuthUserMiddleware, deleteClientController);
 clientRoutes.patch("", checkAuthUserMiddleware, updateClientController);
