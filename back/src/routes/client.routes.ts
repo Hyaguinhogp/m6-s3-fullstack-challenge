@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { addContactController, createClientController, deleteClientController, getClientController, listClientsController, loginController, updateClientController } from "../controllers/entity.controllers";
+import { createClientController, deleteClientController, getClientController, listClientsController, loginController, updateClientController } from "../controllers/entity.controllers";
 import checkAuthUserMiddleware from "../middlewares/checkAuthUser.middleware";
 
 const clientRoutes = Router();

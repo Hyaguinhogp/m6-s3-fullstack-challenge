@@ -1,0 +1,13 @@
+FROM node:16
+
+ENV PORT=8000
+
+EXPOSE 8000
+
+USER root
+
+WORKDIR /app
+
+COPY . .
+
+RUN yarn install
